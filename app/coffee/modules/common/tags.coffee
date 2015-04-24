@@ -237,8 +237,11 @@ TagLineDirective = ($rootScope, $repo, $rs, $confirm, $qqueue, $template, $compi
 
     link = ($scope, $el, $attrs, $model) ->
         isEditable = ->
-            return $scope.project.my_permissions.indexOf($attrs.requiredPerm) != -1
+            if $attrs.requiredPerm?
+                return $scope.project.my_permissions.indexOf($attrs.requiredPerm) != -1
 
+            return true
+            
         ## Render
         renderTags = (tags, tagsColors) ->
             ctx = {
